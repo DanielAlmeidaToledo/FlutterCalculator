@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calculator/components/button_calculator.dart';
+import 'package:flutter_calculator/components/display_buttons.dart';
+import 'package:flutter_calculator/components/display_result.dart';
 import 'package:flutter_calculator/enums/keys.dart';
 import 'package:flutter_calculator/enums/type_keys.dart';
 import 'package:flutter_calculator/utils/calculate.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.blue,
           primary: Colors.blue,
           secondary: Colors.white,
-          background: Colors.grey,
+          background: Colors.grey[800],
         ),
         useMaterial3: true,
       ),
@@ -126,177 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              alignment: Alignment.centerRight,
-              decoration: const BoxDecoration(
-                color: Colors.grey,
-              ),
-              child: Text(
-                _resultText,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Expanded(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(16)),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 40),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            buttonCalculator(
-                              key: Keys.reset,
-                              onPressed: () {
-                                _calculate(Keys.reset);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.delete,
-                              onPressed: () {
-                                _calculate(Keys.delete);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.percentage,
-                              onPressed: () {
-                                _calculate(Keys.percentage);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.multiply,
-                              onPressed: () {
-                                _calculate(Keys.multiply);
-                              },
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            buttonCalculator(
-                              key: Keys.seven,
-                              onPressed: () {
-                                _calculate(Keys.seven);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.eight,
-                              onPressed: () {
-                                _calculate(Keys.eight);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.nine,
-                              onPressed: () {
-                                _calculate(Keys.nine);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.divide,
-                              onPressed: () {
-                                _calculate(Keys.divide);
-                              },
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            buttonCalculator(
-                              key: Keys.four,
-                              onPressed: () {
-                                _calculate(Keys.four);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.five,
-                              onPressed: () {
-                                _calculate(Keys.five);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.six,
-                              onPressed: () {
-                                _calculate(Keys.six);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.subtract,
-                              onPressed: () {
-                                _calculate(Keys.subtract);
-                              },
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            buttonCalculator(
-                              key: Keys.one,
-                              onPressed: () {
-                                _calculate(Keys.one);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.two,
-                              onPressed: () {
-                                _calculate(Keys.two);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.three,
-                              onPressed: () {
-                                _calculate(Keys.three);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.add,
-                              onPressed: () {
-                                _calculate(Keys.add);
-                              },
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            buttonCalculator(
-                              key: Keys.zero,
-                              onPressed: () {
-                                _calculate(Keys.zero);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.dot,
-                              onPressed: () {
-                                _calculate(Keys.dot);
-                              },
-                            ),
-                            buttonCalculator(
-                              key: Keys.equal,
-                              onPressed: () {
-                                _calculate(Keys.equal);
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    )),
-              ],
-            ))
+            displayResult(result: _resultText),
+            displayButtons(calculate: _calculate)
           ],
         ),
       ),
