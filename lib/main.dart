@@ -5,6 +5,8 @@ import 'package:flutter_calculator/enums/keys.dart';
 import 'package:flutter_calculator/enums/type_keys.dart';
 import 'package:flutter_calculator/utils/calculate.dart';
 
+// Created by Daniel Toledo
+
 void main() {
   runApp(const MyApp());
 }
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.blue,
           primary: Colors.blue,
           secondary: Colors.white,
-          background: Colors.grey[800],
+          background: Colors.black,
         ),
         useMaterial3: true,
       ),
@@ -50,6 +52,11 @@ class _MyHomePageState extends State<MyHomePage> {
     switch (key.typeKeys) {
       case TypeKeys.number:
         if (_operation.isEmpty) {
+          if (_result != 0.0) {
+            setState(() {
+              _result = 0.0;
+            });
+          }
           setState(() {
             _number1 += key.textButton;
           });
@@ -59,11 +66,26 @@ class _MyHomePageState extends State<MyHomePage> {
           });
         }
         break;
+
       case TypeKeys.operation:
-        setState(() {
-          _operation = key.textButton;
-        });
+        if (_operation.isNotEmpty && _number2.isNotEmpty) {
+          setState(() {
+            _result = calculateResult(
+              number1: _number1,
+              number2: _number2,
+              operation: _operation,
+            );
+            _number1 = _result.toString();
+            _number2 = "";
+            _operation = key.textButton;
+          });
+        } else {
+          setState(() {
+            _operation = key.textButton;
+          });
+        }
         break;
+
       case TypeKeys.result:
         setState(() {
           _result = calculateResult(
@@ -76,24 +98,18 @@ class _MyHomePageState extends State<MyHomePage> {
           _operation = "";
         });
         break;
+
       case TypeKeys.delete:
-        if (_operation.isEmpty) {
+        if (_operation.isEmpty && _number1.isNotEmpty) {
           setState(() {
-            if (_number1.isNotEmpty) {
-              _number1 = _number1.substring(0, _number1.length - 1);
-            } else {
-              _number1 = "";
-            }
+            _number1 = _number1.substring(0, _number1.length - 1);
           });
-        } else {
+        } else if (_operation.isNotEmpty && _number2.isNotEmpty) {
           setState(() {
-            if (_number2.isNotEmpty) {
-              _number2 = _number2.substring(0, _number2.length - 1);
-            } else {
-              _number2 = "";
-            }
+            _number2 = _number2.substring(0, _number2.length - 1);
           });
         }
+
       case TypeKeys.clear:
         setState(() {
           _result = 0.0;

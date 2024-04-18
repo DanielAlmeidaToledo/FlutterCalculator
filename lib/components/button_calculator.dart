@@ -4,22 +4,30 @@ import 'package:flutter_calculator/enums/type_keys.dart';
 
 Widget buttonCalculator(
     {required Keys key, required void Function() onPressed}) {
-  return ElevatedButton(
-    onPressed: onPressed,
-    style: ElevatedButton.styleFrom(
-      minimumSize:
-          key.textButton == "0" ? const Size(190, 90) : const Size(90, 90),
-      backgroundColor:
-          key.typeKeys == TypeKeys.result ? Colors.blue : Colors.grey[900],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(2),
+  return Expanded(
+    child: ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: key.typeKeys == TypeKeys.result
+            ? Colors.blue[800]
+            : Colors.grey[900],
+        minimumSize: const Size.fromHeight(80),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(2),
+          side: const BorderSide(
+            color: Colors.black,
+            width: 1,
+          ),
+        ),
       ),
-    ),
-    child: Text(
-      key.textButton,
-      style: TextStyle(
-        color: key.typeKeys == TypeKeys.operation ? Colors.blue : Colors.white,
-        fontSize: 20,
+      child: Text(
+        key.textButton,
+        style: TextStyle(
+          color: key.typeKeys == TypeKeys.operation
+              ? Colors.blue[500]
+              : Colors.white,
+          fontSize: 20,
+        ),
       ),
     ),
   );

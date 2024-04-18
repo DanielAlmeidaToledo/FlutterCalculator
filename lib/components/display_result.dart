@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 
 Widget displayResult({required String result}) {
-  return Container(
-    height: 160,
-    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-    alignment: Alignment.bottomRight,
-    decoration: const BoxDecoration(
-      color: Colors.transparent,
-      border: Border(
-        bottom: BorderSide(color: Colors.white, width: 1.5),
-        top: BorderSide(color: Colors.white, width: 1.5),
-        right: BorderSide(color: Colors.white, width: 1.5),
-        left: BorderSide(color: Colors.white, width: 1.5),
+  return Expanded(
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[800],
       ),
-    ),
-    child: Text(
-      result,
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 64,
-        fontWeight: FontWeight.w600,
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
+      alignment: Alignment.bottomRight,
+      child: Text(
+        result,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 64,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     ),
   );
