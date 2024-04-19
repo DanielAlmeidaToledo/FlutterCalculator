@@ -39,5 +39,5 @@ String showResult({
       result == 0.0) {
     return "$number1 $operation $number2";
   }
-  return result.toStringAsFixed(result.truncateToDouble() == result ? 0 : 2);
+  return result.toString();
 }

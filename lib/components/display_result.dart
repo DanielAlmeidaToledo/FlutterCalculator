@@ -10,9 +10,9 @@ Widget displayResult({required String result}) {
       alignment: Alignment.bottomRight,
       child: Text(
         result,
-        style: const TextStyle(
+        style: TextStyle(
           color: Colors.white,
-          fontSize: 64,
+          fontSize: result.length > 10 ? 48 : 64,
           fontWeight: FontWeight.w600,
         ),
       ),
