@@ -56,9 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
             if (_result != 0.0) {
               _result = 0.0;
             }
-            _number1 += key.textButton;
+            if (!(key.textButton == '.' && _number1.contains('.'))) {
+              _number1 += key.textButton;
+            }
           } else {
-            _number2 += key.textButton;
+            if (!(key.textButton == '.' && _number2.contains('.'))) {
+              _number2 += key.textButton;
+            }
           }
         });
         break;
@@ -74,6 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
             _number1 = _result.toString();
             _number2 = "";
             _operation = key.textButton;
+          } else if (_number1.isEmpty) {
+            _number1 = "0";
+            _operation = key.textButton;
           } else {
             _operation = key.textButton;
           }
@@ -82,6 +89,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
       case TypeKeys.result:
         setState(() {
+          if (_number2.isEmpty) {
+            setState(() {
+              _number2 = _number1;
+            });
+          }
+
           _result = calculateResult(
             number1: _number1,
             number2: _number2,
@@ -91,14 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
           if (_result.isNaN || _result.isInfinite) {
             _result = 0.0;
             _number1 = "Error";
-          } else if (_result % 1 == 0) {
-            _number1 = _result.toInt().toString();
           } else {
-            final int numberLength = _result.toString().split(".")[0].length;
-            final int decimalLength = _result.toString().split(".")[1].length;
-            int fixedLength = 10;
-
-            _number1 = _result.toStringAsFixed(fixedLength.abs());
+            _number1 = _result.toString();
           }
 
           _number2 = "";
@@ -135,6 +142,11 @@ class _MyHomePageState extends State<MyHomePage> {
         result: _result,
       );
     });
+
+    print("N1: $_number1");
+    print("N2: $_number2");
+    print("Operation: $_operation");
+    print("Result: $_result");
   }
 
   @override
