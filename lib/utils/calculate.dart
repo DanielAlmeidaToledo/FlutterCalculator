@@ -4,20 +4,20 @@ double calculateResult({
   required String number2,
   required String operation,
 }) {
+  var n1 = double.parse(number1);
+  var n2 = double.parse(number2);
+
   switch (operation) {
     case "+":
-      print(double.parse(number1));
-      print(double.parse(number2));
-      print(double.parse(number1) + double.parse(number2));
-      return double.parse(number1) + double.parse(number2);
+      return n1 + n2;
     case "-":
-      return double.parse(number1) - double.parse(number2);
+      return n1 - n2;
     case "x":
-      return double.parse(number1) * double.parse(number2);
+      return n1 * n2;
     case "÷":
-      return double.parse(number1) / double.parse(number2);
+      return n1 / n2;
     case "%":
-      return double.parse(number1) / 100;
+      return n1 / 100;
     default:
       return 0;
   }
@@ -33,21 +33,14 @@ String showResult({
   if (number1.isEmpty && operation.isEmpty && number2.isEmpty) {
     return "0";
   } else if (number1.isNotEmpty && operation.isEmpty && number2.isEmpty) {
-    return number1;
+    return number1.endsWith(".0")
+        ? number1.substring(0, number1.length - 2)
+        : number1;
   } else if (number1.isNotEmpty && operation.isNotEmpty && number2.isEmpty) {
     return "$number1 $operation";
   } else if (number1.isNotEmpty && operation.isNotEmpty && number2.isNotEmpty) {
     return "$number1 $operation $number2";
   }
 
-//   print(result.abs());
-//   // Verifica se o resultado é muito grande para ser exibido normalmente
-//   if (result.abs() >= 1e10 || result.abs() <= 1e-10) {
-//     // Formata o resultado para notação científica com 5 casas decimais
-//     return result.toStringAsExponential(5);
-//   } else {
-//     // Formata o resultado com 10 casas decimais
-//     return result.toStringAsFixed(10);
-//   }
   return result.toString();
 }

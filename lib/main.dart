@@ -49,6 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
   var _resultText = "0";
 
   void _calculate(Keys key) {
+    setState(() {
+      _number1 = _number1 == "Error" ? "" : _number1;
+    });
+
     switch (key.typeKeys) {
       case TypeKeys.number:
         setState(() {
@@ -123,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _number1 = _number1.substring(0, _number1.length - 1);
           }
         });
+        break;
 
       case TypeKeys.clear:
         setState(() {
