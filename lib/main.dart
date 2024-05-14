@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:decimal/decimal.dart';
 import 'package:flutter_calculator/components/display_buttons.dart';
 import 'package:flutter_calculator/components/display_result.dart';
 import 'package:flutter_calculator/enums/keys.dart';
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var _number1 = "";
   var _number2 = "";
   var _operation = "";
-  var _result = 0.0;
+  var _result = Decimal.zero;
   var _resultText = "0";
 
   void _calculate(Keys key) {
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           if (_operation.isEmpty) {
             if (_result != 0.0) {
-              _result = 0.0;
+              _result = Decimal.zero;
             }
             if (!(key.textButton == '.' && _number1.contains('.'))) {
               _number1 += key.textButton;
@@ -105,8 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
             operation: _operation,
           );
 
-          if (_result.isNaN || _result.isInfinite) {
-            _result = 0.0;
+          if (_result.toDouble().isNaN || _result.toDouble().isInfinite) {
+            _result = Decimal.zero;
             _number1 = "Error";
           } else {
             _number1 = _result.toString();
@@ -131,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       case TypeKeys.clear:
         setState(() {
-          _result = 0.0;
+          _result = Decimal.zero;
           _number1 = "";
           _number2 = "";
           _operation = "";
@@ -147,11 +148,6 @@ class _MyHomePageState extends State<MyHomePage> {
         result: _result,
       );
     });
-
-    print("N1: $_number1");
-    print("N2: $_number2");
-    print("Operation: $_operation");
-    print("Result: $_result");
   }
 
   @override
