@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calculator/enums/keys.dart';
-import 'package:flutter_calculator/components/button_calculator.dart';
+import 'package:danieltoledo_bt3031926/enums/keys.dart';
+import 'package:danieltoledo_bt3031926/components/button_calculator.dart';
 
 Widget displayButtons({required void Function(Keys key) calculate}) {
   return Column(

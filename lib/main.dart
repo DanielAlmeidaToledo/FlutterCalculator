@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:decimal/decimal.dart';
-import 'package:flutter_calculator/components/display_buttons.dart';
-import 'package:flutter_calculator/components/display_result.dart';
-import 'package:flutter_calculator/enums/keys.dart';
-import 'package:flutter_calculator/enums/type_keys.dart';
-import 'package:flutter_calculator/utils/calculate.dart';
+import 'package:danieltoledo_bt3031926/components/display_buttons.dart';
+import 'package:danieltoledo_bt3031926/components/display_result.dart';
+import 'package:danieltoledo_bt3031926/enums/keys.dart';
+import 'package:danieltoledo_bt3031926/enums/type_keys.dart';
+import 'package:danieltoledo_bt3031926/utils/calculate.dart';
 
 // Created by Daniel Toledo
 
