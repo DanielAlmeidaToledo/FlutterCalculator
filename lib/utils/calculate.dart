@@ -17,8 +17,7 @@ Decimal calculateResult({
     case "x":
       return n1 * n2;
     case "÷":
-      // return Decimal.parse((n1 / n2).toString());
-      return n1 / n2;
+      return (n1 / n2).toDecimal(scaleOnInfinitePrecision: 20);
     case "%":
       return n1 * Decimal.parse("0.01") * n2;
     default:
