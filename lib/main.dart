@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:decimal/decimal.dart';
+import 'package:flutter/services.dart';
 import 'package:danieltoledo_bt3031926/components/display_buttons.dart';
 import 'package:danieltoledo_bt3031926/components/display_result.dart';
 import 'package:danieltoledo_bt3031926/enums/keys.dart';
@@ -17,6 +18,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Fixando a orientação do aplicativo
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return MaterialApp(
       title: 'Calculator',
       theme: ThemeData(
@@ -24,7 +31,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.blue,
           primary: Colors.blue,
           secondary: Colors.white,
-          background: Colors.black,
+          background: const Color.fromARGB(255, 31, 18, 18),
         ),
         useMaterial3: true,
       ),
@@ -61,11 +68,23 @@ class _MyHomePageState extends State<MyHomePage> {
             if (_result != 0.0) {
               _result = Decimal.zero;
             }
-            if (!(key.textButton == '.' && _number1.contains('.'))) {
+            if (key.textButton == '.') {
+              if (_number1.isEmpty) {
+                _number1 = '0.';
+              } else if (!_number1.contains('.')) {
+                _number1 += key.textButton;
+              }
+            } else {
               _number1 += key.textButton;
             }
           } else {
-            if (!(key.textButton == '.' && _number2.contains('.'))) {
+            if (key.textButton == '.') {
+              if (_number2.isEmpty) {
+                _number2 = '0.';
+              } else if (!_number2.contains('.')) {
+                _number2 += key.textButton;
+              }
+            } else {
               _number2 += key.textButton;
             }
           }
@@ -83,6 +102,15 @@ class _MyHomePageState extends State<MyHomePage> {
             _number1 = _result.toString();
             _number2 = "";
             _operation = key.textButton;
+          } else if (key.textButton == '%') {
+            _result = calculateResult(
+              number1: _number1,
+              number2: _number2,
+              operation: key.textButton,
+            );
+            _number1 = _result.toString();
+            _number2 = "";
+            _operation = "";
           } else if (_number1.isEmpty) {
             _number1 = "0";
             _operation = key.textButton;
@@ -94,27 +122,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
       case TypeKeys.result:
         setState(() {
-          if (_number2.isEmpty) {
-            setState(() {
-              _number2 = _number1;
-            });
-          }
-
-          _result = calculateResult(
-            number1: _number1,
-            number2: _number2,
-            operation: _operation,
-          );
-
-          if (_result.toDouble().isNaN || _result.toDouble().isInfinite) {
-            _result = Decimal.zero;
-            _number1 = "Error";
+          if (_number1.isNotEmpty && _operation.isEmpty && _number2.isEmpty) {
+            _result = Decimal.parse(_number1);
           } else {
-            _number1 = _result.toString();
-          }
+            if (_number2.isEmpty &&
+                _number1.isNotEmpty &&
+                _operation.isNotEmpty) {
+              _number2 = _number1;
+            }
 
-          _number2 = "";
-          _operation = "";
+            // Verifica se é divisão por zero
+            if (_operation == '÷' && Decimal.parse(_number2) == Decimal.zero) {
+              _result = Decimal.zero;
+              _number1 = "Error";
+            } else {
+              _result = calculateResult(
+                number1: _number1,
+                number2: _number2,
+                operation: _operation,
+              );
+
+              if (_result.toDouble().isNaN || _result.toDouble().isInfinite) {
+                _result = Decimal.zero;
+                _number1 = "Error";
+              } else {
+                _number1 = _result.toString();
+              }
+            }
+
+            _number2 = "";
+            _operation = "";
+          }
         });
         break;
 
