@@ -68,24 +68,30 @@ class _MyHomePageState extends State<MyHomePage> {
             if (_result != 0.0) {
               _result = Decimal.zero;
             }
-            if (key.textButton == '.') {
-              if (_number1.isEmpty) {
-                _number1 = '0.';
-              } else if (!_number1.contains('.')) {
+            // Verifica se o total de dígitos não excede 10
+            if (_number1.length < 10) {
+              if (key.textButton == '.') {
+                if (_number1.isEmpty) {
+                  _number1 = '0.';
+                } else if (!_number1.contains('.')) {
+                  _number1 += key.textButton;
+                }
+              } else {
                 _number1 += key.textButton;
               }
-            } else {
-              _number1 += key.textButton;
             }
           } else {
-            if (key.textButton == '.') {
-              if (_number2.isEmpty) {
-                _number2 = '0.';
-              } else if (!_number2.contains('.')) {
+            // Verifica se o total de dígitos não excede 10
+            if (_number2.length < 10) {
+              if (key.textButton == '.') {
+                if (_number2.isEmpty) {
+                  _number2 = '0.';
+                } else if (!_number2.contains('.')) {
+                  _number2 += key.textButton;
+                }
+              } else {
                 _number2 += key.textButton;
               }
-            } else {
-              _number2 += key.textButton;
             }
           }
         });
