@@ -6,6 +6,7 @@ import 'package:danieltoledo_bt3031926/components/display_result.dart';
 import 'package:danieltoledo_bt3031926/enums/keys.dart';
 import 'package:danieltoledo_bt3031926/enums/type_keys.dart';
 import 'package:danieltoledo_bt3031926/utils/calculate.dart';
+import 'package:danieltoledo_bt3031926/utils/result_logic.dart';
 
 // Created by Daniel Toledo
 
