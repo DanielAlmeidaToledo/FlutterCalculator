@@ -38,13 +38,14 @@ String showResult({
     String formattedResult = number1;
 
     if (formattedResult.contains('.')) {
-      // Se o resultado contiver um ponto decimal
+      // Se o resultado conter um ponto decimal
       List<String> parts = formattedResult.split('.');
       String integerPart = parts[0];
       String decimalPart = parts[1];
+      // Remove os zeros à direita da parte decimal
       String formattedDecimalPart = decimalPart.replaceAll(RegExp(r'0+$'), '');
       formattedResult = formattedDecimalPart.isEmpty
-          ? integerPart
+          ? '$integerPart.'
           : '$integerPart.$formattedDecimalPart';
     }
 
