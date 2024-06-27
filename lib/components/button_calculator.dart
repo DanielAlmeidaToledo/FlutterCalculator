@@ -11,12 +11,12 @@ Widget buttonCalculator(
         backgroundColor: key.typeKeys == TypeKeys.result
             ? Colors.blue[800]
             : Colors.grey[900],
-        fixedSize: Size(key.textButton == '0' ? 160 : 0, 80),
+        fixedSize: const Size(160, 100),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(2),
           side: const BorderSide(
             color: Colors.black,
-            width: 1,
+            width: 2,
           ),
         ),
       ),
@@ -26,7 +26,7 @@ Widget buttonCalculator(
           color: key.typeKeys == TypeKeys.operation
               ? Colors.blue[500]
               : Colors.white,
-          fontSize: key.typeKeys == TypeKeys.operation ? 24 : 20,
+          fontSize: 24,
         ),
       ),
     ),

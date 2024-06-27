@@ -26,13 +26,14 @@ class MyApp extends StatelessWidget {
     ]);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Calculator',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
           primary: Colors.blue,
           secondary: Colors.white,
-          background: const Color.fromARGB(255, 31, 18, 18),
+          background: Colors.black,
         ),
         useMaterial3: true,
       ),
@@ -66,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
       case TypeKeys.number:
         setState(() {
           if (_operation.isEmpty) {
-            if (_result != 0.0) {
+            if (_result != Decimal.zero) {
               _result = Decimal.zero;
             }
             // Verifica se o total de dígitos não excede 10
@@ -77,6 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 } else if (!_number1.contains('.')) {
                   _number1 += key.textButton;
                 }
+              } else if (_number1 == "0") {
+                _number1 = key.textButton;
               } else {
                 _number1 += key.textButton;
               }
@@ -198,13 +201,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        title: Text(
-          widget.title,
-          style: const TextStyle(color: Colors.white),
-        ),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,

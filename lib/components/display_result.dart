@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 Widget displayResult({required String result}) {
+//
+
   return Expanded(
     child: Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[800],
+      decoration: const BoxDecoration(
+        color: Colors.black,
       ),
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
       alignment: Alignment.bottomRight,
