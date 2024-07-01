@@ -1,4 +1,5 @@
 import 'package:decimal/decimal.dart';
+import 'package:intl/intl.dart';
 
 // Função que exibe o resultado da calculadora
 String showResult({
@@ -33,20 +34,24 @@ String showResult({
 
   // Valida se o resultado é maior que 10 caracteres
   if (result.toString().length > 10) {
-    return formatLargeResult(result);
+    return formatLargeResult(result.toDouble());
   }
 
   return result.toString();
 }
 
-String formatLargeResult(Decimal result) {
-  String resultString = result.toString();
+String formatLargeResult(double result) {
+  // Defina a precisão desejada para o arredondamento
+  int precision = 10;
 
-  // Se o resultado for maior que 10 caracteres, usar notação científica
-  if (resultString.length > 10) {
-    resultString =
-        result.toStringAsExponential(9); // Ajusta para 10 caracteres no total
+  // Formate o número usando NumberFormat
+  NumberFormat formatter = NumberFormat.decimalPattern('en-US');
+  String formattedResult = formatter.format(result);
+
+  // Se o resultado for muito grande, aplique a notação científica
+  if (result.abs() >= 1e9 || result.abs() <= 1e-9) {
+    formattedResult = result.toStringAsPrecision(precision);
   }
 
-  return resultString;
+  return formattedResult;
 }

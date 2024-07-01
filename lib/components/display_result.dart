@@ -14,7 +14,11 @@ Widget displayResult({required String result}) {
         result,
         style: TextStyle(
           color: Colors.white,
-          fontSize: result.length > 10 ? 48 : 64,
+          fontSize: result.length > 10
+              ? result.length > 16
+                  ? 28
+                  : 40
+              : 54,
           fontWeight: FontWeight.w600,
         ),
       ),
