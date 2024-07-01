@@ -41,14 +41,11 @@ String showResult({
 }
 
 String formatLargeResult(double result) {
-  // Defina a precisão desejada para o arredondamento
   int precision = 10;
 
-  // Formate o número usando NumberFormat
   NumberFormat formatter = NumberFormat.decimalPattern('en-US');
   String formattedResult = formatter.format(result);
 
-  // Se o resultado for muito grande, aplique a notação científica
   if (result.abs() >= 1e9 || result.abs() <= 1e-9) {
     formattedResult = result.toStringAsPrecision(precision);
   }
