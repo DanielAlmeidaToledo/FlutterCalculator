@@ -44,6 +44,7 @@ String showResult({
 
 String formatLargeResult(double result) {
   int precision;
+  String formattedResult;
 
   // Define a precisão com base no valor absoluto do resultado
   if (result.abs() >= 1e9 || result.abs() <= 1e-9) {
@@ -53,10 +54,15 @@ String formatLargeResult(double result) {
   } else if (result.abs() >= 1e3 || result.abs() <= 1e-3) {
     precision = 5;
   } else {
-    precision = 2;
+    precision = 6;
   }
 
-  String formattedResult = result.toStringAsPrecision(precision);
+  // Usa a notação científica para valores muito grandes ou pequenos
+  if (result.abs() >= 1e9 || result.abs() <= 1e-9) {
+    formattedResult = result.toStringAsPrecision(precision);
+  } else {
+    formattedResult = result.toStringAsFixed(precision);
+  }
 
   // Usa a notação científica para valores muito grandes
   if (result.abs() >= 1e3 && result.abs() < 1e9) {
