@@ -11,7 +11,7 @@ Widget buttonCalculator(
         backgroundColor: key.typeKeys == TypeKeys.result
             ? Colors.blue[800]
             : Colors.grey[900],
-        fixedSize: const Size(160, 100),
+        fixedSize: const Size(160, 90),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(2),
           side: const BorderSide(
