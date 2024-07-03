@@ -159,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 _result = Decimal.zero;
                 _number1 = "Error";
                 _operation = "";
-              } else if (RegExp(r'÷ 0\b').hasMatch(_expression)) {
+              } else if (RegExp(r'÷ 0 ').hasMatch(_expression)) {
                 _result = Decimal.zero;
                 _number1 = "Error";
                 _operation = "";
