@@ -40,33 +40,44 @@ Decimal evaluateExpression(String expression) {
     tokens.add(tokens[tokens.length - 2]);
   }
 
-  // Trata multiplicação, divisão e porcentagem primeiro
+  // Trata porcentagem primeiro
   for (int i = 0; i < tokens.length; i++) {
-    if (tokens[i] == 'x' || tokens[i] == '÷' || tokens[i] == '%') {
-      if (tokens[i] == '%') {
-        // Calcula a porcentagem
-        Decimal percent = Decimal.parse(tokens[i - 1]) * Decimal.parse("0.01");
-        Decimal number1 = Decimal.parse(tokens[i - 3]);
-        Decimal result = number1 * percent;
+    if (tokens[i] == '%') {
+      Decimal percent = Decimal.zero;
+      Decimal number1 = Decimal.zero;
+      Decimal result = Decimal.zero;
+      // Calcula a porcentagem
 
-        // Substitui os tokens pelo resultado da porcentagem
-        tokens[i - 1] = result.toString();
-        tokens.removeAt(i); // Remove o operador %
-        i--;
+      if (tokens[i - 2].contains('x')) {
+        result = Decimal.parse(tokens[i - 1]) * Decimal.parse("0.01");
       } else {
-        // Calcula multiplicação ou divisão
-        Decimal result = calculateResult(
-          number1: tokens[i - 1],
-          number2: tokens[i + 1],
-          operation: tokens[i],
-        );
-
-        // Substitui os tokens pelo resultado
-        tokens[i - 1] = result.toString();
-        tokens.removeAt(i); // Remove o operador
-        tokens.removeAt(i); // Remove o número 2
-        i--;
+        percent = Decimal.parse(tokens[i - 1]) * Decimal.parse("0.01");
+        number1 = Decimal.parse(tokens[i - 3]);
+        result = number1 * percent;
       }
+
+      // Substitui os tokens pelo resultado da porcentagem
+      tokens[i - 1] = result.toString();
+      tokens.removeAt(i); // Remove o operador %
+      i--;
+    }
+  }
+
+  // Trata multiplicação, divisão
+  for (int i = 0; i < tokens.length; i++) {
+    if (tokens[i] == 'x' || tokens[i] == '÷') {
+      // Calcula multiplicação ou divisão
+      Decimal result = calculateResult(
+        number1: tokens[i - 1],
+        number2: tokens[i + 1],
+        operation: tokens[i],
+      );
+
+      // Substitui os tokens pelo resultado
+      tokens[i - 1] = result.toString();
+      tokens.removeAt(i); // Remove o operador
+      tokens.removeAt(i); // Remove o número 2
+      i--;
     }
   }
 
