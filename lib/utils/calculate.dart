@@ -45,8 +45,8 @@ Decimal evaluateExpression(String expression) {
     if (tokens[i] == 'x' || tokens[i] == '÷' || tokens[i] == '%') {
       if (tokens[i] == '%') {
         // Calcula a porcentagem
-        Decimal number1 = Decimal.parse(tokens[i - 1]);
-        Decimal percent = Decimal.parse(tokens[i + 1]) * Decimal.parse("0.01");
+        Decimal percent = Decimal.parse(tokens[i - 1]) * Decimal.parse("0.01");
+        Decimal number1 = Decimal.parse(tokens[i - 3]);
         Decimal result = number1 * percent;
 
         // Substitui os tokens pelo resultado da porcentagem
