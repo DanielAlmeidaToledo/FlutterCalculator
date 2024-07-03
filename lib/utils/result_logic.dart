@@ -21,7 +21,6 @@ String showResult({
       List<String> parts = formattedResult.split('.');
       String integerPart = parts[0];
       String decimalPart = parts[1];
-      // Remove os zeros à direita da parte decimal
       formattedResult =
           decimalPart.isEmpty ? '$integerPart.' : '$integerPart.$decimalPart';
     }
