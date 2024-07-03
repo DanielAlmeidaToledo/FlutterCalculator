@@ -7,9 +7,12 @@ String showResult({
   required String number2,
   required String operation,
   required Decimal result,
+  String expression = "",
 }) {
   if (number1.isEmpty && operation.isEmpty && number2.isEmpty) {
     return "0";
+  } else if (number1.isEmpty && expression.isNotEmpty) {
+    return expression;
   } else if (number1.isNotEmpty && operation.isEmpty && number2.isEmpty) {
     String formattedResult = number1;
 
@@ -42,6 +45,7 @@ String showResult({
   return result.toString();
 }
 
+// Função que formata o resultado para valores grandes
 String formatLargeResult(double result) {
   int precision;
   String formattedResult;

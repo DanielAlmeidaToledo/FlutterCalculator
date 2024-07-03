@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:danieltoledo_bt3031926/enums/keys.dart';
 import 'package:danieltoledo_bt3031926/components/button_calculator.dart';
 
+// Widget que exibe os botões da calculadora
 Widget displayButtons({required void Function(Keys key) calculate}) {
   return Column(
     children: [

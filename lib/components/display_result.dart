@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
+// Widget que exibe o resultado da calculadora
 Widget displayResult({required String result}) {
-//
-
   return Expanded(
     child: Container(
       decoration: const BoxDecoration(
