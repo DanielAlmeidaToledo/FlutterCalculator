@@ -43,17 +43,30 @@ Decimal evaluateExpression(String expression) {
   // Trata multiplicação, divisão e porcentagem primeiro
   for (int i = 0; i < tokens.length; i++) {
     if (tokens[i] == 'x' || tokens[i] == '÷' || tokens[i] == '%') {
-      Decimal result = calculateResult(
-        number1: tokens[i - 1],
-        number2: tokens[i + 1],
-        operation: tokens[i],
-      );
+      if (tokens[i] == '%') {
+        // Calcula a porcentagem
+        Decimal number1 = Decimal.parse(tokens[i - 1]);
+        Decimal percent = Decimal.parse(tokens[i + 1]) * Decimal.parse("0.01");
+        Decimal result = number1 * percent;
 
-      // Substitui os tokens pelo resultado
-      tokens[i - 1] = result.toString();
-      tokens.removeAt(i); // Remove o operador
-      tokens.removeAt(i); // Remove o numero 2
-      i--;
+        // Substitui os tokens pelo resultado da porcentagem
+        tokens[i - 1] = result.toString();
+        tokens.removeAt(i); // Remove o operador %
+        i--;
+      } else {
+        // Calcula multiplicação ou divisão
+        Decimal result = calculateResult(
+          number1: tokens[i - 1],
+          number2: tokens[i + 1],
+          operation: tokens[i],
+        );
+
+        // Substitui os tokens pelo resultado
+        tokens[i - 1] = result.toString();
+        tokens.removeAt(i); // Remove o operador
+        tokens.removeAt(i); // Remove o número 2
+        i--;
+      }
     }
   }
 
